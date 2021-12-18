@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+   <title>Friendships</title>
+</head>
+<body>
+   <h1>Friendships</h1>
+   <div class = "shared-row">
+      <div class="card col-6">
+         <div class="card-body">
+            <h2 class="card-title">All Users</h2>
+            {% for one_user in all_users %}
+               <p class="card-text"><a href="/user/{{one_user.id}}">{{one_user}}</a></p>
+            {% endfor %}
+         </div>
+      </div>
+  
+      <div class="shared-column">
+         <form action="/create/user" method="post" class="col-10 p-3 bg-dark text-light">
+            <h2 class="text-center text-primary">New User</h2>
+            <div class="form-group">
+               <label for="first_name">First Name:</label>
+               <input type="text" name="first_name" class="form-control">
+            </div>
+            <div class="form-group">
+               <label for="last_name">Last Name:</label>
+               <input type="text" name="last_name" class="form-control">
+            </div>
+            <input type="submit" value="Add User" class="btn btn-primary">
+         </form>
+
+         <form action="/create/friendship" method="post" class="col-10 p-3 bg-dark text-light">
+            <h2 class="text-center text-primary">Create Friendship</h2>
+            <label for="user"> Select User </label>  
+            <select name="user_id" id="user">  
+               {% for one_user in all_users %}
+               <option value = "{{one_user.id}}"> {{one_user}}</option>  
+               {% endfor %}
+            </select> 
+            </p> 
+            <label> Select Friend </label> 
+            <select name="friend_id">  
+               {% for one_user in all_users %}
+                  <option value = "{{one_user.id}}"> {{one_user}}</option>  
+               {% endfor %}
+            </select>  
+            <input type="submit" value="Create" class="btn btn-primary">
+         
+         </form>
+      </div>
+   </div>
+</body>
+</html>

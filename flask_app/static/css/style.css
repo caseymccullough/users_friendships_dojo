@@ -1,0 +1,20 @@
+body{
+   background-color: pink;
+}
+
+.shared-row{
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   padding: 0 100px;
+   border: 1px black solid;
+}
+
+.shared-column{
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+
+  
+
+}
