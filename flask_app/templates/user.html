@@ -24,6 +24,8 @@
             <tr>
                <td><a href="/users/{{one_friend.id}}">{{one_friend.first_name}} {{one_friend.last_name}} </a></td>
                <td>{{one_friend.created_at.strftime("%B")}} {{one_friend.created_at.strftime("%d")}}, {{one_friend.created_at.strftime("%Y")}}</td>
+               <td><button onclick="location.href = '/users/{{user.id}}/deletefriend/{{one_friend.id}}';" id="deleteBtn" class="btn btn-danger" >Delete Friend</button></td>
+               <!--  -->
             </tr>
          {% endfor %}   
       </table>

@@ -21,7 +21,7 @@ def show_user(id):
    print("user in route:", user)
    return render_template('user.html', user = user)
 
-@app.route('/users/<int:id>/delete', methods=['POST'])
+@app.route('/users/<int:id>/delete', methods=['GET','POST'])
 def delete_user(id):
    data = {
       "id" : id

@@ -25,7 +25,7 @@ class User:
    @classmethod
    def get_by_id(cls, data):
       query = "SELECT * FROM users WHERE users.id = %(id)s;"
-      friend_query = "SELECT friendships.created_at, users.id, users.first_name, users.last_name FROM friendships.friendships LEFT JOIN users ON friendships.friend_id = users.id WHERE user_id = %(id)s;"
+      friend_query = "SELECT friendships.id, friendships.created_at, users.id, users.first_name, users.last_name FROM friendships.friendships LEFT JOIN users ON friendships.friend_id = users.id WHERE user_id = %(id)s;"
       results = connectToMySQL('friendships').query_db(query,data)
       friends = connectToMySQL('friendships').query_db(friend_query, data)
       user = cls(results[0])
@@ -59,5 +59,5 @@ class User:
    @classmethod
    def delete(cls, data):
       query = "DELETE FROM users WHERE id = %(id)s;" # cascades so friendships will be removed as well
-      results = connectToMySQL('users').query_db(query, data)
+      results = connectToMySQL('friendships').query_db(query, data)
       return results

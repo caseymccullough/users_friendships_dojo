@@ -16,8 +16,7 @@
             {% for one_user in all_users %}
                <div class="shared-row">
                   <p class="card-text"><a href="/users/{{one_user.id}}">{{one_user}}</a></p>
-                  <input type="button" value="Delete" class="btn btn-danger">
-                  <a href="/users/{{one_user.id}}/delete" method="post">Delete User</a>
+                  <button onclick="location.href = '/users/{{one_user.id}}/delete';" id="deleteBtn" class="btn btn-danger" >Delete</button>
                </div>
             {% endfor %}
          </div>

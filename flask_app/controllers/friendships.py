@@ -15,3 +15,13 @@ def create_friendship():
    }
    friendship_id = Friendship.save(data)
    return redirect('/friendships')
+
+@app.route('/users/<int:user_id>/deletefriend/<int:friendship_id>', methods=['GET','POST'])
+def delete_friendship(user_id, friendship_id):
+   data = {
+      "id" : friendship_id
+   }
+   print("data in route:", data)
+   friendship = Friendship.delete(data)
+   print("friendship in route:", friendship)
+   return redirect('/users/' + str(user_id)) # FIX THIS

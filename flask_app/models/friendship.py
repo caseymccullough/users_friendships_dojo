@@ -31,3 +31,9 @@ class Friendship:
    def save(cls, data):
       query = "INSERT INTO friendships (user_id, friend_id, created_at, updated_at) VALUES (%(user_id)s, (%(friend_id)s), NOW(), NOW());"
       return connectToMySQL('friendships').query_db(query, data)
+
+   @classmethod
+   def delete(cls, data):
+      query = "DELETE FROM friendships WHERE id = %(id)s;" 
+      results = connectToMySQL('friendships').query_db(query, data)
+      return results
