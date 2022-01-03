@@ -13,26 +13,13 @@
    <div class = "shared-row">
       <div class="card col-6">
          <div class="card-body">
-            <h2 class="card-title">All Users</h2>
-            {% for one_user in all_users %}
-               <p class="card-text"><a href="/user/{{one_user.id}}">{{one_user}}</a></p>
+            <h2 class="card-title">All Friendships</h2>
+            {% for one_friendship in all_friendships %}
+               <p class="card-text"><a href="/friendship/{{one_friendship.id}}">{{one_friendship.user_first}} {{one_friendship.user_last}} friended {{one_friendship.friend_first}} {{one_friendship.friend_last}}</a></p>
             {% endfor %}
          </div>
       </div>
-  
-      <div class="shared-column">
-         <form action="/create/user" method="post" class="col-10 p-3 bg-dark text-light">
-            <h2 class="text-center text-primary">New User</h2>
-            <div class="form-group">
-               <label for="first_name">First Name:</label>
-               <input type="text" name="first_name" class="form-control">
-            </div>
-            <div class="form-group">
-               <label for="last_name">Last Name:</label>
-               <input type="text" name="last_name" class="form-control">
-            </div>
-            <input type="submit" value="Add User" class="btn btn-primary">
-         </form>
+
 
          <form action="/create/friendship" method="post" class="col-10 p-3 bg-dark text-light">
             <h2 class="text-center text-primary">Create Friendship</h2>
@@ -54,5 +41,6 @@
          </form>
       </div>
    </div>
+   <a href="/users" class="btn btn-primary"> Back to Users</a>
 </body>
 </html>

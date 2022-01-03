@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+   <title>Single User</title>
+</head>
+<body>
+   <h1>{{user}}</h1>
+   <h4>User since: {{user.updated_at.strftime("%B")}}, {{user.updated_at.strftime("%Y")}} </h4>
+   
+      <h3>{{user.first_name}}'s Friends:</h3>
+      <table class = "table">
+         <thead>
+            <tr>
+               <th>Friend</th>
+               <th>Friends Since</th>
+            </tr>
+         </thead>
+         {% for one_friend in user.friendships %}
+            <tr>
+               <td><a href="/users/{{one_friend.id}}">{{one_friend.first_name}} {{one_friend.last_name}} </a></td>
+               <td>{{one_friend.created_at.strftime("%B")}} {{one_friend.created_at.strftime("%d")}}, {{one_friend.created_at.strftime("%Y")}}</td>
+            </tr>
+         {% endfor %}   
+      </table>
+
+      
+   <br>
+   <a href="/users" class="btn btn-primary"> Back to Users</a>
+   <a href="/friendships" class="btn btn-primary"> Friendships</a>
+</body>
+</html>

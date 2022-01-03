@@ -5,11 +5,31 @@ from ..models.friendship import Friendship
 
 @app.route('/')
 def index():
-   return redirect('/friendships')
+   return redirect('/users')
 
-@app.route('/friendships')
-def friendships():
-   return render_template('/friendships.html', all_users = User.get_all())
+@app.route('/users')
+def users():
+   return render_template('/users.html', all_users = User.get_all())
+
+@app.route('/users/<int:id>')
+def show_user(id):
+   data = {
+      "id" : id
+   }
+   print("data in route:", data)
+   user = User.get_by_id(data)
+   print("user in route:", user)
+   return render_template('user.html', user = user)
+
+@app.route('/users/<int:id>/delete', methods=['POST'])
+def delete_user(id):
+   data = {
+      "id" : id
+   }
+   print("data in route:", data)
+   user = User.delete(data)
+   print("user in route:", user)
+   return redirect('/users')
 
 @app.route('/create/user', methods=['POST'])
 def create_user():
@@ -18,13 +38,6 @@ def create_user():
       "last_name" : request.form['last_name']
    }
    user_id = User.save(data)
-   return redirect('/friendships')
+   return redirect('/')
 
-@app.route('/create/friendship', methods=['POST'])
-def create_friendship():
-   data = {
-      "user_id" : request.form['user_id'],
-      "friend_id" : request.form['friend_id']
-   }
-   friendship_id = Friendship.save(data)
-   return redirect('/friendships')
+

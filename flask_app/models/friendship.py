@@ -9,15 +9,20 @@ class Friendship:
       self.updated_at = data['updated_at']
 
    def __str__(self):
-      return "" + self.user_id + " friends with " + self.friend_id
+      return str(self.user_id) + " friends with " + str(self.friend_id)
 
    @classmethod
    def get_all(cls):
-      query = "SELECT * FROM friendships;"
+      query = """SELECT  f.id, c1.first_name AS user_first, c1.last_name as user_last, 
+			c2.first_name AS friend_first, c2.last_name as friend_last
+         FROM friendships AS f
+         JOIN users AS c1 ON f.user_id = c1.id
+         JOIN users AS c2 ON f.friend_id = c2.id
+         ORDER BY f.id;"""
       friendships = []
       results = connectToMySQL('friendships').query_db(query)
       for row in results:
-         friendships.append(cls(row))
+         friendships.append(row)
       print("call to get all(): ")
       print(friendships)
       return friendships
